@@ -60,7 +60,7 @@ const ParentDiv = styled.div`
   border-radius: 25px 25px 0px 0px;
   display:flex;
   flex-direction:column;
-  align-items;center;
+  align-items:center;
   gap:32px;
 
   @media screen and (min-width:1024px){
