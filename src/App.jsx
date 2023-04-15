@@ -1,16 +1,38 @@
 import { useState } from "react";
-import GlobalStyles from "./GlobaStyles";
 import styled from "styled-components";
 import logoImg from "/public/logo.svg";
 import Calculate from "./Components/Calculate";
+import ResultOuput from "./Components/ResultOuput";
 
 function App() {
+  const [bill, setbill] = useState(0);
+  const [percent, setpercent] = useState(0);
+  const [numbpeople, setnumbpeople] = useState(0);
+  const [tipPerson, settipPerson] = useState("0.00");
+  const [totalPerson, settotalPerson] = useState("0.00");
   return (
     <Main>
-      <GlobalStyles />
       <img src={logoImg} alt="logo" />
       <ParentDiv>
-        <Calculate />
+        <Calculate
+          percent={percent}
+          setpercent={setpercent}
+          bill={bill}
+          setbill={setbill}
+          numbpeople={numbpeople}
+          setnumbpeople={setnumbpeople}
+          settipPerson={settipPerson}
+          settotalPerson={settotalPerson}
+        />
+        <ResultOuput
+          tipPerson={tipPerson}
+          totalPerson={totalPerson}
+          setnumbpeople={setnumbpeople}
+          settipPerson={settipPerson}
+          settotalPerson={settotalPerson}
+          setbill={setbill}
+          setpercent={setpercent}
+        />
       </ParentDiv>
     </Main>
   );
@@ -40,4 +62,11 @@ const ParentDiv = styled.div`
   flex-direction:column;
   align-items;center;
   gap:32px;
+
+  @media screen and (min-width:1024px){
+    flex-direction:row;
+    border-radius: 25px;
+    width:920px;
+  }
+  
 `;
