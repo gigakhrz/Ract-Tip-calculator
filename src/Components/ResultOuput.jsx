@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 function ResultOuput({
   tipPerson,
   totalPerson,
@@ -8,13 +7,16 @@ function ResultOuput({
   settotalPerson,
   setbill,
   setpercent,
+  butCollor,
+  setbutCollor,
 }) {
   const Reset = () => {
-    setnumbpeople(0);
+    setnumbpeople("");
     settipPerson("0.00");
     settotalPerson("0.00");
-    setbill("0");
-    setpercent(0);
+    setbill("");
+    setpercent("");
+    setbutCollor("#0D686D");
   };
   return (
     <OutputContainer>
@@ -24,17 +26,29 @@ function ResultOuput({
             <h4>Tip Amount</h4>
             <p>/ person</p>
           </Destination>
-          <h1>{tipPerson}</h1>
+          <h1>
+            $
+            {isNaN(tipPerson) || !isFinite(tipPerson)
+              ? "0.00"
+              : Number(tipPerson).toFixed(2)}
+          </h1>
         </Container>
         <Container>
           <Destination>
             <h4>Total</h4>
             <p>/ person</p>
           </Destination>
-          <h1>{totalPerson}</h1>
+          <h1>
+            $
+            {isNaN(totalPerson) || !isFinite(totalPerson)
+              ? "0.00"
+              : Number(totalPerson).toFixed(2)}
+          </h1>
         </Container>
       </DestinationContainer>
-      <button onClick={Reset}>Reset</button>
+      <ResetButton butCollor={butCollor} onClick={Reset}>
+        Reset
+      </ResetButton>
     </OutputContainer>
   );
 }
@@ -51,31 +65,7 @@ const OutputContainer = styled.div`
 
   @media screen and (min-width: 1024px) {
     padding: 40px;
-    gap: 0;
-    justify-content: space-between;
-  }
-  button {
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center;
-    width: 265px;
-    height: 48px;
-    background-color: #26c2ae;
-    color: #00474b;
-    border: none;
-    border-radius: 5px;
-    font-family: "Space Mono", monospace;
-    font-weight: 700;
-    cursor: pointer;
-
-    @media screen and (min-width: 1024px) {
-      width: 100%;
-      background-color: #0d686d;
-
-      :hover {
-        background-color: #9fe8df;
-      }
-    }
+    gap: 122px;
   }
 `;
 
@@ -112,9 +102,38 @@ const DestinationContainer = styled.div`
     text-align: right;
     color: #26c2ae;
   }
+
+  @media screen and (min-width: 1024px) {
+    height: 100%;
+    justify-content: space-between;
+  }
 `;
 
 const Destination = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ResetButton = styled.button`
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  width: 265px;
+  height: 48px;
+  background: ${(props) => props.butCollor};
+  color: #00474b;
+  border: none;
+  border-radius: 5px;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  cursor: pointer;
+
+  @media screen and (min-width: 1024px) {
+    width: 100%;
+    background: ${(props) => props.butCollor};
+  }
+
+  :hover {
+    background-color: #9fe8df;
+  }
 `;

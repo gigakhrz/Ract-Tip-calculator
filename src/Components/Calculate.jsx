@@ -12,6 +12,7 @@ function Calculate({
   setnumbpeople,
   settipPerson,
   settotalPerson,
+  setbutCollor,
 }) {
   // console.log((bill * percent) / 100 / numbpeople);
   useEffect(() => {
@@ -21,17 +22,20 @@ function Calculate({
       settotalPerson((calculatePercent + Number(bill)) / numbpeople);
     }
   }, [bill, numbpeople, percent]);
+
   return (
     <CalculateContainer>
       <BillConatainer>
         <h3>Bill</h3>
         <input
+          value={bill}
           onChange={(e) => {
             setbill(e.target.value);
+            setbutCollor("#26C2AE");
           }}
           type="number"
           id="bill"
-          placeholder={bill}
+          placeholder="0"
         />
       </BillConatainer>
 
@@ -76,6 +80,7 @@ function Calculate({
           <input
             onChange={(e) => {
               setpercent(e.target.value);
+              setbutCollor("#26C2AE");
             }}
             type="number"
             placeholder="Custom"
@@ -84,14 +89,19 @@ function Calculate({
       </SelectTip>
 
       <PersonConatainer>
-        <h3>Number of People</h3>
-        <input
+        <h3>
+          Number of People <Error numbpeople={numbpeople}>Can’t be zero</Error>
+        </h3>
+        <StyledInput
+          value={numbpeople}
           onChange={(e) => {
             setnumbpeople(e.target.value);
+            setbutCollor("#26C2AE");
           }}
           type="number"
           id="person"
           placeholder="0"
+          numbpeople={numbpeople}
         />
       </PersonConatainer>
     </CalculateContainer>
@@ -134,6 +144,11 @@ const CalculateContainer = styled.div`
     font-family: "Space Mono", monospace;
     font-weight: 700;
     cursor: pointer;
+    @media screen and (min-width: 1024px) {
+      :hover {
+        outline: 2px solid #26c2ae;
+      }
+    }
 
     @media screen and (min-width: 1024px) {
       width: 379px;
@@ -159,11 +174,6 @@ const BillConatainer = styled.div`
     background-image: url(${dollarImg});
     background-repeat: no-repeat;
     background-position: 19px 17px;
-    @media screen and (min-width: 1024px) {
-      :hover {
-        outline: 2px solid #26c2ae;
-      }
-    }
   }
 `;
 
@@ -228,9 +238,6 @@ const Percent = styled.div`
     @media screen and (min-width: 1024px) {
       width: 117px;
       padding: 0;
-      :hover {
-        outline: 2px solid #26c2ae;
-      }
     }
   }
 `;
@@ -245,6 +252,36 @@ const PersonConatainer = styled.div`
     background-repeat: no-repeat;
     background-position: 19px 17px;
   }
+
+  h3 {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+const StyledInput = styled.input`
+  background: #f3f9fa;
+  border-radius: 5px;
+  border: 0;
+  width: 311px;
+  height: 48px;
+  padding: 17px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: right;
+  color: #00474b;
+  cursor: pointer;
+  outline: ${(props) =>
+    props.numbpeople === "0" ? "2px solid #e17457" : "none"};
+`;
+
+const Error = styled.span`
+  color: red;
+  font-size: 16px;
+  line-height: 24px;
+  display: ${(props) => (props.numbpeople === "0" ? "blcok" : "none")};
 `;
 
 export default Calculate;

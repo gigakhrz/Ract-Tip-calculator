@@ -5,16 +5,19 @@ import Calculate from "./Components/Calculate";
 import ResultOuput from "./Components/ResultOuput";
 
 function App() {
-  const [bill, setbill] = useState(0);
-  const [percent, setpercent] = useState(0);
-  const [numbpeople, setnumbpeople] = useState(0);
+  const [bill, setbill] = useState("");
+  const [percent, setpercent] = useState("");
+  const [numbpeople, setnumbpeople] = useState("");
   const [tipPerson, settipPerson] = useState("0.00");
   const [totalPerson, settotalPerson] = useState("0.00");
+  const [butCollor, setbutCollor] = useState("#0D686D");
   return (
     <Main>
       <img src={logoImg} alt="logo" />
       <ParentDiv>
         <Calculate
+          butCollor={butCollor}
+          setbutCollor={setbutCollor}
           percent={percent}
           setpercent={setpercent}
           bill={bill}
@@ -25,6 +28,8 @@ function App() {
           settotalPerson={settotalPerson}
         />
         <ResultOuput
+          butCollor={butCollor}
+          setbutCollor={setbutCollor}
           tipPerson={tipPerson}
           totalPerson={totalPerson}
           setnumbpeople={setnumbpeople}
@@ -53,20 +58,19 @@ const Main = styled.main`
 const ParentDiv = styled.div`
   width: 375px;
   height: 100%;
-  padding:32px;
+  padding: 32px;
   background-color: white;
   background: #ffffff;
   box-shadow: 0px 32px 43px rgba(79, 166, 175, 0.200735);
   border-radius: 25px 25px 0px 0px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
 
-  @media screen and (min-width:1024px){
-    flex-direction:row;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
     border-radius: 25px;
-    width:920px;
+    width: 920px;
   }
-  
 `;
