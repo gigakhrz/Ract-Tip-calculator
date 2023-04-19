@@ -106,6 +106,11 @@ const DestinationContainer = styled.div`
   @media screen and (min-width: 1024px) {
     height: 100%;
     justify-content: space-between;
+    h1 {
+      font-size: 48px;
+      line-height: 71.1px;
+      letter-spacing: -1px;
+    }
   }
 `;
 

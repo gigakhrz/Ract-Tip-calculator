@@ -43,6 +43,8 @@ function Calculate({
         <h3>Select Tip %</h3>
         <Percent>
           <button
+            className={percent === "5" ? "active" : ""}
+            percent={percent}
             onClick={() => {
               setpercent("5");
             }}
@@ -50,6 +52,8 @@ function Calculate({
             5%
           </button>
           <button
+            className={percent === "10" ? "active" : ""}
+            percent={percent}
             onClick={() => {
               setpercent("10");
             }}
@@ -57,6 +61,8 @@ function Calculate({
             10%
           </button>
           <button
+            className={percent === "15" ? "active" : ""}
+            percent={percent}
             onClick={() => {
               setpercent("15");
             }}
@@ -64,6 +70,8 @@ function Calculate({
             15%
           </button>
           <button
+            className={percent === "25" ? "active" : ""}
+            percent={percent}
             onClick={() => {
               setpercent("25");
             }}
@@ -71,6 +79,8 @@ function Calculate({
             25%
           </button>
           <button
+            className={percent === "50" ? "active" : ""}
+            percent={percent}
             onClick={() => {
               setpercent("50");
             }}
@@ -78,6 +88,7 @@ function Calculate({
             50%
           </button>
           <input
+            value={percent}
             onChange={(e) => {
               setpercent(e.target.value);
               setbutCollor("#26C2AE");
@@ -118,6 +129,7 @@ const CalculateContainer = styled.div`
   @media screen and (min-width: 1024px) {
     min-width: 385px;
     align-items: flex-start;
+    margin: 16px 0px 16px 16px;
   }
 
   //styles for every input and label
@@ -152,6 +164,13 @@ const CalculateContainer = styled.div`
 
     @media screen and (min-width: 1024px) {
       width: 379px;
+    }
+
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      display: none;
     }
 
     ::placeholder {
@@ -189,6 +208,10 @@ const Percent = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16.5px;
+
+  .active {
+    background-color: #26c2ae;
+  }
 
   @media screen and (min-width: 1024px) {
     gap: 14px;
@@ -239,6 +262,10 @@ const Percent = styled.div`
       width: 117px;
       padding: 0;
     }
+
+    ::placeholder {
+      margin-left: 10px;
+    }
   }
 `;
 
@@ -259,6 +286,19 @@ const PersonConatainer = styled.div`
   }
 `;
 
+//button
+const PercentButton = styled.button`
+  background: ${(props) =>
+    props.percent === "5" ||
+    props.percent === "10" ||
+    props.percent === "15" ||
+    props.percent === "25" ||
+    props.percent === "50"
+      ? "background: #26C2AE"
+      : "background: #00474b"};
+`;
+
+//input
 const StyledInput = styled.input`
   background: #f3f9fa;
   border-radius: 5px;
